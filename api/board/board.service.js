@@ -6,9 +6,9 @@ const asyncLocalStorage = require('../../services/als.service')
 async function query(filterBy = {}) {
     try {
         const criteria = _buildCriteria(filterBy)
-        const collection = await dbService.getCollection('review')
-        // const reviews = await collection.find(criteria).toArray()
-        var reviews = await collection.aggregate([
+        const collection = await dbService.getCollection('board')
+        // const boards = await collection.find(criteria).toArray()
+        var boards = await collection.aggregate([
             {
                 $match: criteria
             },
@@ -37,51 +37,51 @@ async function query(filterBy = {}) {
                 $unwind: '$aboutUser'
             }
         ]).toArray()
-        reviews = reviews.map(review => {
-            review.byUser = { _id: review.byUser._id, fullname: review.byUser.fullname }
-            review.aboutUser = { _id: review.aboutUser._id, fullname: review.aboutUser.fullname }
-            delete review.byUserId
-            delete review.aboutUserId
-            return review
+        boards = boards.map(board => {
+            board.byUser = { _id: board.byUser._id, fullname: board.byUser.fullname }
+            board.aboutUser = { _id: board.aboutUser._id, fullname: board.aboutUser.fullname }
+            delete board.byUserId
+            delete board.aboutUserId
+            return board
         })
 
-        return reviews
+        return boards
     } catch (err) {
-        logger.error('cannot find reviews', err)
+        logger.error('cannot find boards', err)
         throw err
     }
 
 }
 
-async function remove(reviewId) {
+async function remove(boardId) {
     try {
         const store = asyncLocalStorage.getStore()
         const { loggedinUser } = store
-        const collection = await dbService.getCollection('review')
+        const collection = await dbService.getCollection('board')
         // remove only if user is owner/admin
-        const criteria = { _id: ObjectId(reviewId) }
+        const criteria = { _id: ObjectId(boardId) }
         if (!loggedinUser.isAdmin) criteria.byUserId = ObjectId(loggedinUser._id)
         const {deletedCount} = await collection.deleteOne(criteria)
         return deletedCount
     } catch (err) {
-        logger.error(`cannot remove review ${reviewId}`, err)
+        logger.error(`cannot remove board ${boardId}`, err)
         throw err
     }
 }
 
 
-async function add(review) {
+async function add(board) {
     try {
-        const reviewToAdd = {
-            byUserId: ObjectId(review.byUserId),
-            aboutUserId: ObjectId(review.aboutUserId),
-            txt: review.txt
+        const boardToAdd = {
+            byUserId: ObjectId(board.byUserId),
+            aboutUserId: ObjectId(board.aboutUserId),
+            txt: board.txt
         }
-        const collection = await dbService.getCollection('review')
-        await collection.insertOne(reviewToAdd)
-        return reviewToAdd
+        const collection = await dbService.getCollection('board')
+        await collection.insertOne(boardToAdd)
+        return boardToAdd
     } catch (err) {
-        logger.error('cannot insert review', err)
+        logger.error('cannot insert board', err)
         throw err
     }
 }
