@@ -93,12 +93,72 @@ async function getById(boardId) {
     }
 }
 
-async function add(board) {
+async function add(board, user) {
     try {
         const boardToAdd = {
             byUserId: ObjectId(board.byUserId),
             aboutUserId: ObjectId(board.aboutUserId),
-            txt: board.txt,
+            title: board.title,
+            title: "Robot dev proj",
+            archivedAt: null,
+            createdAt: Date.now(),
+            isStatic: false,
+            isStarred: false,
+            createdBy: { fullname: "Abi Abambi", imgUrl: "http://some-img" },
+            style: {
+                backgroundImg: "https://wallpapercave.com/wp/wp4676582.jpg",
+            },
+            labels: [
+                { id: "r101", title: "Done", color: "#61bd4f" },
+                { id: "r102", title: "Progress", color: "#61bd33" },
+            ],
+            members: [user],
+            groups: [
+                {
+                    id: "q101",
+                    title: "Group 1",
+                    archivedAt: 1589983468418,
+                    type: "container",
+                    tasks: [Array],
+                    style: {},
+                },
+                {
+                    id: "q102",
+                    title: "Group title",
+                    archivedAt: 1589983468418,
+                    type: "container",
+                    tasks: [Array],
+                    style: {},
+                },
+                {
+                    id: "q103",
+                    title: "more demo",
+                    archivedAt: 1589983468418,
+                    type: "container",
+                    tasks: [Array],
+                    style: {},
+                },
+                {
+                    id: "q104",
+                    title: "bootcamp",
+                    archivedAt: 1589983468418,
+                    type: "container",
+                    tasks: [Array],
+                    style: {},
+                },
+            ],
+            activities: [
+                {
+                    id: "h101",
+                    txt: "Changed Color",
+                    createdAt: 154514,
+                    byMember: [Object],
+                    task: "Replace Logo",
+                },
+            ],
+            cmpsOrder: ["status-picker", "member-picker", "date-picker"],
+            isRecentlyViewed: true,
+            byUserId: "62dfd7695e8559ec9fbd714b",
         }
         const collection = await dbService.getCollection("board")
         await collection.insertOne(boardToAdd)
@@ -120,5 +180,5 @@ module.exports = {
     remove,
     add,
     getById,
-    update
+    update,
 }

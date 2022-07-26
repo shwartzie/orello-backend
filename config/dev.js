@@ -1,3 +1,3 @@
 module.exports = {
-  dbURL: 'mongodb://localhost:27017',
+  dbURL: 'mongodb+srv://shwartzie:410896Roni@orello.djgmygm.mongodb.net/?retryWrites=true&w=majority',
 }

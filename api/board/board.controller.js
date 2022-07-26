@@ -47,15 +47,15 @@ async function addBoard(req, res) {
     try {
         var board = req.body
         board.byUserId = loggedinUser._id
-        board = await boardService.add(board)
-        
-        board.aboutUser = await userService.getById(board.aboutUserId)
+        console.log('board:',board);
+        board = await boardService.add(board, loggedinUser)
+        board.aboutUser = await userService.getById(board.byUserId)
         board.byUser = loggedinUser
-
         socketService.broadcast({type: 'board-added', data: board, userId: loggedinUser._id.toString()})
         socketService.emitToUser({type: 'board-about-you', data: board, userId: board.aboutUserId})
         
         const fullUser = await userService.getById(loggedinUser._id)
+        console.log('fullUser:',fullUser);
         socketService.emitTo({type: 'user-updated', data: fullUser, label: fullUser._id})
 
         res.send(board)
