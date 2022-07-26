@@ -284,7 +284,7 @@ async function add(board, user) {
                             id: "h101",
                             txt: "Changed Color",
                             createdAt: 154514,
-                            byMember: [Object],
+                            byMember: [],
                             task: "Replace Logo",
                         },
                     ],
@@ -295,6 +295,15 @@ async function add(board, user) {
                     ],
                     isRecentlyViewed: true,
                     byUserId: "62dfd7695e8559ec9fbd714b",
+                },
+            ],
+            activities: [
+                {
+                    id: "h101",
+                    txt: "Changed Color",
+                    createdAt: 154514,
+                    byMember: [],
+                    task: "Replace Logo",
                 },
             ],
         }
