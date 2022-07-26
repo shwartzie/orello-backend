@@ -7,8 +7,9 @@ async function login(req, res) {
         const user = await authService.login(username, password)
         const loginToken = authService.getLoginToken(user)
         logger.info('User login: ', user)
-        res.cookie('loginToken', loginToken, {sameSite: 'None', secure: true})
+        res.cookie('loginToken', loginToken)
         res.json(user)
+        console.log('loginToken:',loginToken);
     } catch (err) {
         logger.error('Failed to Login ' + err)
         res.status(401).send({ err: 'Failed to Login' })
@@ -20,6 +21,7 @@ async function signup(req, res) {
         const credentials = req.body
         // Never log passwords
         // logger.debug(credentials)
+
         const account = await authService.signup(credentials)
         logger.debug(`auth.route - new account created: ` + JSON.stringify(account))
         const user = await authService.login(credentials.username, credentials.password)

@@ -13,6 +13,17 @@ async function getBoards(req, res) {
         res.status(500).send({ err: 'Failed to get boards' })
     }
 }
+async function getBoard(req, res) {
+    try {
+        const boardId = req.params.id
+        const board = await boardService.getById(boardId)
+        res.json(board)
+    } catch (err) {
+        logger.error('Failed to get board', err)
+        res.status(500).send({ err: 'Failed to get board' })
+    }
+}
+
 
 async function deleteBoard(req, res) {
     try {
@@ -38,21 +49,8 @@ async function addBoard(req, res) {
         board.byUserId = loggedinUser._id
         board = await boardService.add(board)
         
-        // prepare the updated board for sending out
         board.aboutUser = await userService.getById(board.aboutUserId)
-        
-        // Give the user credit for adding a board
-        // var user = await userService.getById(board.byUserId)
-        // user.score += 10
-        loggedinUser.score += 10
-
-        loggedinUser = await userService.update(loggedinUser)
         board.byUser = loggedinUser
-
-        // User info is saved also in the login-token, update it
-        const loginToken = authService.getLoginToken(loggedinUser)
-        res.cookie('loginToken', loginToken)
-
 
         socketService.broadcast({type: 'board-added', data: board, userId: loggedinUser._id.toString()})
         socketService.emitToUser({type: 'board-about-you', data: board, userId: board.aboutUserId})
@@ -68,8 +66,21 @@ async function addBoard(req, res) {
     }
 }
 
+async function updateBoard(req, res) {
+    try {
+      const board = req.body
+      const updatedBoard = await boardService.update(board)
+      res.json(updatedBoard)
+    } catch (err) {
+      logger.error("Failed to update board", err)
+      res.status(500).send({ err: "Failed to update board" })
+    }
+  }
+
 module.exports = {
     getBoards,
     deleteBoard,
-    addBoard
+    addBoard,
+    getBoard,
+    updateBoard
 }
