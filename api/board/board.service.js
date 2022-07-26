@@ -2,7 +2,7 @@ const dbService = require("../../services/db.service")
 const logger = require("../../services/logger.service")
 const ObjectId = require("mongodb").ObjectId
 const asyncLocalStorage = require("../../services/als.service")
-
+const utilService = require('../../services/util.service.js')
 async function query(filterBy = {}) {
     try {
         const criteria = _buildCriteria(filterBy)
@@ -104,7 +104,7 @@ async function add(board, user) {
             createdAt: Date.now(),
             isStatic: false,
             isStarred: false,
-            createdBy: { fullname: "Abi Abambi", imgUrl: "http://some-img" },
+            createdBy: user,
             style: {
                 backgroundImg: "https://wallpapercave.com/wp/wp4676582.jpg",
             },
@@ -115,11 +115,13 @@ async function add(board, user) {
             members: [user],
             groups: [
                 {
+                    id: utilService.makeId(),
                     title: "Group 1",
                     archivedAt: 1589983468418,
                     type: "container",
                     tasks: [
                         {
+                            id: utilService.makeId(),
                             title: "Replace logo",
                             members: [],
                             type: "draggable",
@@ -127,6 +129,7 @@ async function add(board, user) {
                             dueDate: null,
                         },
                         {
+                            id: utilService.makeId(),
                             title: "Add Samples",
                             members: [],
                             type: "draggable",
@@ -137,11 +140,13 @@ async function add(board, user) {
                     style: {},
                 },
                 {
+                    id: utilService.makeId(),
                     title: "Group title",
                     archivedAt: 1589983468418,
                     type: "container",
                     tasks: [
                         {
+                            id: utilService.makeId(),
                             title: "try to find a reason to live",
                             members: [],
                             type: "draggable",
@@ -150,6 +155,7 @@ async function add(board, user) {
                             dueDate: null,
                         },
                         {
+                            id: utilService.makeId(),
                             title: "learn css",
                             members: [],
                             type: "draggable",
@@ -161,11 +167,13 @@ async function add(board, user) {
                     style: {},
                 },
                 {
+                    id: utilService.makeId(),
                     title: "more demo",
                     archivedAt: 1589983468418,
                     type: "container",
                     tasks: [
                         {
+                            id: utilService.makeId(),
                             title: "add tasks",
                             type: "draggable",
                             description: "",
@@ -174,6 +182,7 @@ async function add(board, user) {
                             members: [],
                         },
                         {
+                            id: utilService.makeId(),
                             title: "add labels",
                             type: "draggable",
                             description: "",
@@ -182,6 +191,7 @@ async function add(board, user) {
                             members: [],
                         },
                         {
+                            id: utilService.makeId(),
                             title: "fix modal",
                             type: "draggable",
                             description: "",
@@ -190,6 +200,7 @@ async function add(board, user) {
                             members: [],
                         },
                         {
+                            id: utilService.makeId(),
                             title: "fix dnd",
                             type: "draggable",
                             description: "",
@@ -198,6 +209,7 @@ async function add(board, user) {
                             members: [],
                         },
                         {
+                            id: utilService.makeId(),
                             title: "more modals",
                             type: "draggable",
                             description: "",
@@ -206,6 +218,7 @@ async function add(board, user) {
                             members: [],
                         },
                         {
+                            id: utilService.makeId(),
                             title: "change font",
                             type: "draggable",
                             description: "",
@@ -214,6 +227,7 @@ async function add(board, user) {
                             members: [],
                         },
                         {
+                            id: utilService.makeId(),
                             title: "more logos",
                             type: "draggable",
                             description: "",
@@ -222,6 +236,7 @@ async function add(board, user) {
                             members: [],
                         },
                         {
+                            id: utilService.makeId(),
                             title: "eat healthy",
                             type: "draggable",
                             description: "",
@@ -230,12 +245,38 @@ async function add(board, user) {
                             members: [],
                         },
                         {
+                            id: utilService.makeId(),
                             title: "workout",
                             type: "draggable",
                             description: "",
                             createdAt: null,
                             dueDate: null,
                             members: [],
+                        },
+                        {
+                            id: utilService.makeId(),
+                            title: "Group 1",
+                            archivedAt: 1589983468418,
+                            type: "container",
+                            tasks: [
+                                {
+                                    id: utilService.makeId(),
+                                    title: "Replace logo",
+                                    members: [],
+                                    type: "draggable",
+                                    createdAt: null,
+                                    dueDate: null,
+                                },
+                                {
+                                    id: utilService.makeId(),
+                                    title: "Add Samples",
+                                    members: [],
+                                    type: "draggable",
+                                    createdAt: null,
+                                    dueDate: null,
+                                },
+                            ],
+                            style: {},
                         },
                     ],
                     activities: [
