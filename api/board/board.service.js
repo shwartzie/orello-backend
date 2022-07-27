@@ -281,7 +281,7 @@ async function add(board, user) {
                     ],
                     activities: [
                         {
-                            id: "h101",
+                            id: utilService.makeId(),
                             txt: "Changed Color",
                             createdAt: 154514,
                             byMember: [],

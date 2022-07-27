@@ -71,13 +71,14 @@ async function remove(userId) {
     }
 }
 
-async function update(user) {
+async function update({_id, fullname, imgUrl, isJoined}) {
     try {
         // peek only updatable properties
         const userToSave = {
-            _id: ObjectId(user._id), // needed for the returnd obj
-            fullname: user.fullname,
-            score: user.score,
+            _id: ObjectId(_id), // needed for the returnd obj
+            fullname,
+            imgUrl,
+            isJoined
         }
         const collection = await dbService.getCollection('user')
         await collection.updateOne({ _id: userToSave._id }, { $set: userToSave })
