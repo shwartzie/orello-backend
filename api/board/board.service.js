@@ -280,16 +280,25 @@ async function add(board, user) {
 					],
 					activities: [
 						{
-							id: 'h101',
+							id: utilService.makeId(),
 							txt: 'Changed Color',
 							createdAt: 154514,
-							byMember: [Object],
+							byMember: [],
 							task: 'Replace Logo'
 						}
 					],
 					cmpsOrder: ['status-picker', 'member-picker', 'date-picker'],
 					isRecentlyViewed: true,
 					byUserId: '62dfd7695e8559ec9fbd714b'
+				}
+			],
+			activities: [
+				{
+					id: 'h101',
+					txt: 'Changed Color',
+					createdAt: 154514,
+					byMember: [],
+					task: 'Replace Logo'
 				}
 			]
 		}

@@ -9,7 +9,6 @@ async function login(req, res) {
 		logger.info('User login: ', user)
 		res.cookie('loginToken', loginToken)
 		res.json(user)
-		console.log('loginToken:', loginToken)
 	} catch (err) {
 		logger.error('Failed to Login ' + err)
 		res.status(401).send({ err: 'Failed to Login' })

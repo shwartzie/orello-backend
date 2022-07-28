@@ -49,6 +49,14 @@ function setupSocketAPI(http) {
 			logger.info(`Removing socket.userId for socket [id: ${socket.id}]`)
 			delete socket.userId
 		})
+		socket.on('updateBoard', board => {
+			console.log('UPDATING BOARD IN SOCKET')
+			broadcast({
+				type: 'updateBoard',
+				data: board,
+				userId: socket.userId
+			})
+		})
 	})
 }
 
@@ -73,7 +81,7 @@ async function emitToUser({ type, data, userId }) {
 
 // If possible, send to all sockets BUT not the current socket
 // Optionally, broadcast to a room / to all
-async function broadcast({ type, data, room = null, userId }) {
+async function broadcast({ type, data, userId, room = null }) {
 	logger.info(`Broadcasting event: ${type}`)
 	const excludedSocket = await _getUserSocket(userId)
 	if (room && excludedSocket) {
