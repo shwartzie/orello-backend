@@ -116,6 +116,20 @@ function setupSocketAPI(http) {
                 userId: socket.userId,
             })
         })
+        socket.on("updateGroups", (board) => {
+            broadcast({
+                type: "update-group-list",
+                data: board,
+                userId: socket.userId,
+            })
+        })
+        socket.on("updateGroupsOnAdd", (board) => {
+            broadcast({
+                type: "update-on-add-group",
+                data: board,
+                userId: socket.userId,
+            })
+        })
        
     })
 }
