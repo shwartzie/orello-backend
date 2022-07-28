@@ -49,10 +49,69 @@ function setupSocketAPI(http) {
 			logger.info(`Removing socket.userId for socket [id: ${socket.id}]`)
 			delete socket.userId
 		})
-		socket.on('updateBoard', board => {
+		socket.on('updateStarred', board => {
 			console.log('UPDATING BOARD IN SOCKET')
 			broadcast({
-				type: 'updateBoard',
+				type: 'update-starred',
+				data: board,
+				userId: socket.userId
+			})
+		})
+		socket.on('updateJoined', board => {
+			console.log('UPDATING BOARD IN SOCKET')
+			broadcast({
+				type: 'update-joined',
+				data: board,
+				userId: socket.userId
+			})
+		})
+		socket.on('updateBoardTitle', board => {
+			console.log('UPDATING BOARD IN SOCKET')
+			broadcast({
+				type: 'update-board-title',
+				data: board,
+				userId: socket.userId
+			})
+		})
+		socket.on('onJoinToTask', board => {
+			console.log('UPDATING BOARD IN SOCKET')
+			broadcast({
+				type: 'update-task-on-join',
+				data: board,
+				userId: socket.userId
+			})
+		})
+		socket.on('onMembersAddTask', board => {
+			broadcast({
+				type: 'update-task-on-members',
+				data: board,
+				userId: socket.userId
+			})
+		})
+		socket.on('onAddLabels', board => {
+			broadcast({
+				type: 'update-task-labels',
+				data: board,
+				userId: socket.userId
+			})
+		})
+		socket.on('onAddChecklist', board => {
+			broadcast({
+				type: 'update-task-checklists',
+				data: board,
+				userId: socket.userId
+			})
+		})
+		socket.on('updateTaskCover', board => {
+			broadcast({
+				type: 'update-task-cover',
+				data: board,
+				userId: socket.userId
+			})
+		})
+		socket.on('updateTaskAttachment', board => {
+			broadcast({
+				type: 'update-task-attachments',
 				data: board,
 				userId: socket.userId
 			})
