@@ -60,7 +60,7 @@ async function addBoard(req, res) {
     } catch (err) {
         logger.error('Failed to add board', err)
         res.status(500).send({ err: 'Failed to add board' })
-    }
+    }   
 }
 
 async function updateBoard(req, res) {
