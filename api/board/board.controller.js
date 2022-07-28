@@ -3,7 +3,6 @@ const userService = require('../user/user.service')
 const authService = require('../auth/auth.service')
 const socketService = require('../../services/socket.service')
 const boardService = require('./board.service')
-
 async function getBoards(req, res) {
     try {
         const boards = await boardService.query(req.query)
@@ -65,10 +64,16 @@ async function addBoard(req, res) {
 }
 
 async function updateBoard(req, res) {
+    const loggedinUser = authService.validateToken(req.cookies.loginToken)
     try {
       const board = req.body
-      console.log(board)
       const updatedBoard = await boardService.update(board)
+      
+    //   socketService.broadcast({
+    //     type: "updateBoard",
+    //     userId: loggedinUser._id,
+    // })
+    // socketService.emit('updateBoard', board)
       res.json(updatedBoard)
     } catch (err) {
       logger.error("Failed to update board", err)
