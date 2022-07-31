@@ -1,14 +1,3 @@
-const isImageURL = require('image-url-validator').default
-const dominantColor = require('dominant-color')
-
-dominantColor(
-	'https://images.unsplash.com/photo-1658901475133-36e26984805d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80.jpg',
-	function (err, color) {
-		// hex color by default
-		console.log(color) // '5b6c6e'
-	}
-)
-
 function makeId(length = 5) {
 	var txt = ''
 	var possible =
