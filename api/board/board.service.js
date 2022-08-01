@@ -317,6 +317,8 @@ function _buildCriteria(filterBy) {
 	return criteria
 }
 
+
+
 module.exports = {
 	query,
 	remove,
