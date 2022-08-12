@@ -1,6 +1,6 @@
 const authService = require('./auth.service')
 const logger = require('../../services/logger.service')
-
+const userService = require('../user/user.service')
 async function login(req, res) {
     const { username, password } = req.body
     try {
@@ -36,6 +36,11 @@ async function signup(req, res) {
 
 async function logout(req, res){
     try {
+        const user = req.body
+        if(user.username == 'Guest') {
+            userService.remove(user._id)
+        }
+        delete user
         res.clearCookie('loginToken')
         res.send({ msg: 'Logged out successfully' })
     } catch (err) {

@@ -127,6 +127,7 @@ async function add(board, user) {
                             type: "draggable",
                             createdAt: null,
                             dueDate: null,
+                            activites: []
                         },
                         {
                             id: utilService.makeId(),
@@ -135,6 +136,7 @@ async function add(board, user) {
                             type: "draggable",
                             createdAt: null,
                             dueDate: null,
+                            activites: []
                         },
                     ],
                     style: {},
@@ -153,6 +155,7 @@ async function add(board, user) {
                             description: "",
                             createdAt: null,
                             dueDate: null,
+                            activites: []
                         },
                         {
                             id: utilService.makeId(),
@@ -162,6 +165,7 @@ async function add(board, user) {
                             description: "",
                             createdAt: null,
                             dueDate: null,
+                            activites: []
                         },
                     ],
                     style: {},
@@ -180,6 +184,7 @@ async function add(board, user) {
                             createdAt: null,
                             dueDate: null,
                             members: [],
+                            activites: []
                         },
                         {
                             id: utilService.makeId(),
@@ -189,6 +194,7 @@ async function add(board, user) {
                             createdAt: null,
                             dueDate: null,
                             members: [],
+                            activites: []
                         },
                         {
                             id: utilService.makeId(),
@@ -198,6 +204,7 @@ async function add(board, user) {
                             createdAt: null,
                             dueDate: null,
                             members: [],
+                            activites: []
                         },
                         {
                             id: utilService.makeId(),
@@ -207,6 +214,7 @@ async function add(board, user) {
                             createdAt: null,
                             dueDate: null,
                             members: [],
+                            activites: []
                         },
                         {
                             id: utilService.makeId(),
@@ -216,6 +224,7 @@ async function add(board, user) {
                             createdAt: null,
                             dueDate: null,
                             members: [],
+                            activites: []
                         },
                         {
                             id: utilService.makeId(),
@@ -225,6 +234,7 @@ async function add(board, user) {
                             createdAt: null,
                             dueDate: null,
                             members: [],
+                            activites: []
                         },
                         {
                             id: utilService.makeId(),
@@ -234,6 +244,7 @@ async function add(board, user) {
                             createdAt: null,
                             dueDate: null,
                             members: [],
+                            activites: []
                         },
                         {
                             id: utilService.makeId(),
@@ -243,6 +254,7 @@ async function add(board, user) {
                             createdAt: null,
                             dueDate: null,
                             members: [],
+                            activites: []
                         },
                         {
                             id: utilService.makeId(),
@@ -252,6 +264,7 @@ async function add(board, user) {
                             createdAt: null,
                             dueDate: null,
                             members: [],
+                            activites: []
                         },
                         {
                             id: utilService.makeId(),
@@ -266,6 +279,7 @@ async function add(board, user) {
                                     type: "draggable",
                                     createdAt: null,
                                     dueDate: null,
+                                    activites: []
                                 },
                                 {
                                     id: utilService.makeId(),
@@ -274,6 +288,7 @@ async function add(board, user) {
                                     type: "draggable",
                                     createdAt: null,
                                     dueDate: null,
+                                    activites: []
                                 },
                             ],
                             style: {},
@@ -297,15 +312,7 @@ async function add(board, user) {
                     byUserId: "62dfd7695e8559ec9fbd714b",
                 },
             ],
-            activities: [
-                {
-                    id: "h101",
-                    txt: "Changed Color",
-                    createdAt: 154514,
-                    byMember: [],
-                    task: "Replace Logo",
-                },
-            ],
+            activities: [],
         }
         const collection = await dbService.getCollection("board")
         await collection.insertOne(boardToAdd)

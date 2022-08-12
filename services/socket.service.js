@@ -102,9 +102,9 @@ function setupSocketAPI(http) {
                 userId: socket.userId,
             })
         }) 
-        socket.on("updateTaskCover", (board) => {
+        socket.on("onUpdateTask", (board) => {
             broadcast({
-                type: "update-task-cover",
+                type: "update-task",
                 data: board,
                 userId: socket.userId,
             })
@@ -126,6 +126,13 @@ function setupSocketAPI(http) {
         socket.on("updateGroupsOnAdd", (board) => {
             broadcast({
                 type: "update-on-add-group",
+                data: board,
+                userId: socket.userId,
+            })
+        })
+        socket.on("updateDate", (board) => {
+            broadcast({
+                type: "update-on-dates",
                 data: board,
                 userId: socket.userId,
             })

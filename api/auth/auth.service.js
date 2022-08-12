@@ -37,6 +37,16 @@ async function signup({username, password, fullname, imgUrl}) {
     return userService.add({ username, password: hash, fullname, imgUrl })
 }
 
+async function logout(req, res) {
+    try {
+        const user = req.body
+       
+        delete user
+    } catch (err) {
+        logger.error('Failed to logout user', err)
+        res.status(500).send({ err: 'Failed to logout user' })
+    }
+}
 
 function getLoginToken(user) {
     return cryptr.encrypt(JSON.stringify(user))    
@@ -60,5 +70,6 @@ module.exports = {
     signup,
     login,
     getLoginToken,
-    validateToken
+    validateToken,
+    logout
 }

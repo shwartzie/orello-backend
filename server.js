@@ -5,11 +5,14 @@ const cookieParser = require('cookie-parser')
 
 const app = express()
 const http = require('http').createServer(app)
+const bodyParser = require('body-parser')
 
 // Express App Config
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.static('public'))
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.resolve(__dirname, 'public')))
 } else {
@@ -28,8 +31,8 @@ const boardRoutes = require('./api/board/board.routes')
 const {setupSocketAPI} = require('./services/socket.service')
 
 // routes
-const setupAsyncLocalStorage = require('./middlewares/setupAls.middleware')
-app.all('*', setupAsyncLocalStorage)
+// const setupAsyncLocalStorage = require('./middlewares/setupAls.middleware')
+// app.all('*', setupAsyncLocalStorage)
 
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)

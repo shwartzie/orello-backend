@@ -41,7 +41,7 @@ async function deleteBoard(req, res) {
 
 async function addBoard(req, res) {
 
-    var loggedinUser = authService.validateToken(req.cookies.loginToken)
+    var loggedinUser = authService.validateToken(req.cookies?.loginToken)
  
     try {
         var board = req.body
@@ -64,16 +64,9 @@ async function addBoard(req, res) {
 }
 
 async function updateBoard(req, res) {
-    const loggedinUser = authService.validateToken(req.cookies.loginToken)
     try {
       const board = req.body
       const updatedBoard = await boardService.update(board)
-      
-    //   socketService.broadcast({
-    //     type: "updateBoard",
-    //     userId: loggedinUser._id,
-    // })
-    // socketService.emit('updateBoard', board)
       res.json(updatedBoard)
     } catch (err) {
       logger.error("Failed to update board", err)
@@ -86,5 +79,5 @@ module.exports = {
     deleteBoard,
     addBoard,
     getBoard,
-    updateBoard
+    updateBoard,
 }

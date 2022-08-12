@@ -47,9 +47,20 @@ async function updateUser(req, res) {
     }
 }
 
+async function logout(req, res) {
+    try {
+        const user = req.body
+        
+        delete user
+    } catch (err) {
+        logger.error('Failed to logout user', err)
+        res.status(500).send({ err: 'Failed to logout user' })
+    }
+}
 module.exports = {
     getUser,
     getUsers,
     deleteUser,
-    updateUser
+    updateUser,
+    logout
 }
