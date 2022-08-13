@@ -40,7 +40,6 @@ async function signup({username, password, fullname, imgUrl}) {
 async function logout(req, res) {
     try {
         const user = req.body
-       
         delete user
     } catch (err) {
         logger.error('Failed to logout user', err)
