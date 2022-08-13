@@ -37,10 +37,11 @@ async function signup(req, res) {
 	}
 }
 
+
 async function logout(req, res){
     try {
         const user = req.body
-        if(user.username == 'Guest') {
+        if(user.username.includes('Guest')) {
             userService.remove(user._id)
         }
         delete user
